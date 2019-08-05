@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Router } from '@angular/router';
 
+
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticationService {
+export class AdminauthenticationService {
 
-  url = 'http://localhost:3000/users';
+ url = 'http://localhost:3000/admin';
   constructor(private http: HttpClient, private router: Router) { }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -18,7 +19,7 @@ export class AuthenticationService {
     // console.log(res)
     if (token) {
       // token
-      sessionStorage.setItem('mean-token', token);
+      localStorage.setItem('admin-token', token);
     }
     else
     {
@@ -28,7 +29,7 @@ export class AuthenticationService {
 
   //returns the payload that is the details of user in local storage
   getJwt() {
-    let token = sessionStorage.getItem('mean-token');
+    let token = localStorage.getItem('admin-token');
     if(token)
     {
     let payload = token.split('.')[1]
@@ -45,8 +46,7 @@ export class AuthenticationService {
 
   //removes jwt auth token from local storage signifing logout
   removeJwt() {
-    // window.sessionStorage.removeItem('mean-token');
-    sessionStorage.clear();
+    window.localStorage.removeItem('admin-token');
     // this.router.navigateByUrl('/');
   }
 
@@ -68,7 +68,7 @@ export class AuthenticationService {
       }
       else{
         alert("registration complete")
-        this.router.navigateByUrl('/login');
+        this.router.navigateByUrl('/adminlogin');
       }
       
 
@@ -88,7 +88,7 @@ export class AuthenticationService {
       {
         this.setJwt(res.token)
         console.log(res);
-        this.router.navigateByUrl('/profile');
+        this.router.navigateByUrl('/adminprofile');
         alert('logged in');
       }
     })
@@ -97,24 +97,7 @@ export class AuthenticationService {
   //logout User
   logout()
   {
-    let data = this.getDetails();
-    let obj = {
-      _id : data._id,
-      jwt : sessionStorage.getItem('mean-token')
-    }
-    console.log(obj);
-    this.http.post(`${this.url}/logout`, obj).subscribe(res=>console.log(res));
     this.removeJwt();
-    this.router.navigateByUrl('/login');
-  }
-
-  //aunthentication
-  authenticate(){
-    let data = this.getDetails();
-    let obj = {
-      _id : data._id,
-      jwt : sessionStorage.getItem('mean-token')
-    }
-    this.http.post(`${this.url}/authenticate`, obj).subscribe(res=>console.log(res));
+    this.router.navigateByUrl('/adminlogin');
   }
 }

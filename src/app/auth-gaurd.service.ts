@@ -16,6 +16,7 @@ export class AuthGaurdService implements CanActivate{
     }
     else
     {
+      // this.auth.authenticate();
       return true
     }
   }

@@ -10,6 +10,12 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HeaderComponent } from './header/header.component';
+import { AdminregisterComponent } from './admin/adminregister/adminregister.component';
+import { AdminloginComponent } from './admin/adminlogin/adminlogin.component';
+import { AdminprofileComponent } from './admin/adminprofile/adminprofile.component';
+import { CompanyprofileComponent } from './company/companyprofile/companyprofile.component';
+import { CompanyloginComponent } from './company/companylogin/companylogin.component';
+import { CompanyregisterComponent } from './company/companyregister/companyregister.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +24,13 @@ import { HeaderComponent } from './header/header.component';
     RegisterComponent,
     LoginComponent,
     ProfileComponent,
-    HeaderComponent
+    HeaderComponent,
+    AdminregisterComponent,
+    AdminloginComponent,
+    AdminprofileComponent,
+    CompanyprofileComponent,
+    CompanyloginComponent,
+    CompanyregisterComponent
   ],
   imports: [
     BrowserModule,
